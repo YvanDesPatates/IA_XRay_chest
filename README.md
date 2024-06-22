@@ -18,6 +18,15 @@ Le bootsrap nous à permis de mieux comprendre les metrics et analyser les résu
 
 Chaque étape est détaillée dans [le notebook MNIST](MNIST.ipynb), avec les résultats associés.
 
+Afin d'approfondir le Bootstrap et de le rendre plus ludique, nous avons également réalisé un model de prédiction interactif. 
+Pour l'essayer il vous suffit de lancer [ce Notebook](MNIST_interactif.ipynb) en local après avoir installé les dépendances nécessaires.
+```bash 
+pip3 install numpy tensorflow scikit-learn tkinter
+```
+***attention*** : le model interactif prend environ 2 minute pour se charger. 
+Il est entrainé sur des images de chiffre américain, il ne reconnait donc pas les nombres et échouera plus probablement 
+si vous écrivez des chiffres français (pièges notables : écrire "7" avec une barre au milieu ou "9" avec une courbe en bas).
+
 ## Les radiographies - Zoidberg
 
 ### Analyse des données

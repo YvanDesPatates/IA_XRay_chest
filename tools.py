@@ -24,7 +24,7 @@ def browse_imgs(img_callback, path_folder_callback=None, limit_size=None):
             if path_folder_callback is not None:
                 path_folder_callback(folder_path, images_files)
             array_limit = limit_size if limit_size is not None else len(images_files)
-            #récupération de toutes les (ou des 'limit_size' premières) images du dossier.
+            # récupération de toutes les (ou des 'limit_size' premières) images du dossier.
             for file_name in images_files[:array_limit]:
                 if not file_name.endswith(".jpeg"):
                     continue
@@ -72,24 +72,22 @@ def display_confusion_matrix_and_scores(y_test, y_pred):
     print(f"recall : {recall} | precision : {precision} | f1score : {f1score}")
 
 
-def display_history_curves(history, metrics=None, fig_size=(20, 6), nb_line=1, nb_column=None):
-  if metrics is None:
-    metrics=history.model.metrics_names
-  if nb_column is None:
-    nb_column = len(metrics)
+def plot_history(history, metrics, fig_size=(20, 6), nb_line=1, nb_column=None):
+    if nb_column is None:
+        nb_column = len(metrics)
 
-  plt.figure(figsize=fig_size)
-  plt.title("Evolution du modèle")
+    plt.figure(figsize=fig_size)
+    plt.title("Evolution du modèle")
 
-  index=0
-  for metric_name in metrics:
-    index+=1
-    plt.subplot(nb_line, nb_column, index)
-    plt.plot(history.history[metric_name], marker='o', linestyle='-', label=metric_name)
-    val_scores = "val_"+metric_name
-    plt.plot(history.history[val_scores], label=val_scores)
-    plt.xlabel('Epochs')
-    plt.ylabel(metric_name)
-    plt.legend()
+    index = 0
+    for metric_name in metrics:
+        index += 1
+        plt.subplot(nb_line, nb_column, index)
+        plt.plot(history.history[metric_name], marker='o', linestyle='-', label=metric_name)
+        val_scores = "val_" + metric_name
+        plt.plot(history.history[val_scores], label=val_scores)
+        plt.xlabel('Epochs')
+        plt.ylabel(metric_name)
+        plt.legend()
 
-  plt.show()
+    plt.show()

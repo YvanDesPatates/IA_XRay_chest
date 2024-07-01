@@ -3,8 +3,11 @@ import cv2
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
+from tensorflow.keras import layers
 
 from sklearn.metrics import recall_score, precision_score, f1_score, confusion_matrix
+from sklearn.model_selection import train_test_split
 
 
 # Permet de parcourir les images, et pour chaque image, on applique une fonction de callback
@@ -90,4 +93,77 @@ def plot_history(history, metrics, fig_size=(20, 6), nb_line=1, nb_column=None):
         plt.ylabel(metric_name)
         plt.legend()
 
+    plt.show()
+
+
+def learning_curve():
+    x_total = []
+    y_total = []
+
+    image_size = (100, 100)
+
+    def load_datasets(img, category):
+        new_img = cv2.resize(img, image_size)
+        x_total.append(new_img)
+        category = 0 if category == "NORMAL" else 1
+        y_total.append(category)
+
+    browse_imgs(load_datasets)
+
+    x_total = np.array(x_total) / 255
+    y_total = np.array(y_total)
+
+    # on créer un model sans chercher à l'optimiser, juste pour avoir une idée de la learning curve
+    num_classes = 1
+    core_size = 8
+    model = tf.keras.Sequential([
+        layers.Input(shape=(100, 100, 1)),
+        layers.Conv2D(16, core_size, activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Conv2D(32, core_size, activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Conv2D(64, core_size, activation='relu'),
+        layers.MaxPooling2D(),
+
+        layers.Flatten(),
+        layers.Dense(100, activation='relu'),
+        layers.Dense(200, activation='relu'),
+        layers.Dense(300, activation='relu'),
+        layers.Dense(num_classes, activation='sigmoid')
+    ])
+    model.compile(optimizer='adam',
+                  loss=tf.losses.BinaryCrossentropy(),
+                  metrics=['recall'])
+
+    max_dataset_size = len(y_total)
+    tests_results = {}
+    train_results = {}
+    steps = [2500, 3500, 4000, max_dataset_size]
+    for nb_img in steps:
+        x_data = x_total[:nb_img]
+        y_data = y_total[:nb_img]
+        trainx, valx, trainy, valy = train_test_split(x_data, y_data, test_size=0.2)
+        valx, testx, valy, testy = train_test_split(valx, valy, test_size=0.5)
+
+        model.fit(trainx,
+                  trainy,
+                  validation_data=(valx, valy),
+                  epochs=2,
+                  verbose=0)
+
+        y_pred = model.predict(testx, verbose=0)
+        y_pred_label = np.round(y_pred).astype(int)
+        tests_results[nb_img] = recall_score(testy, y_pred_label)
+
+        y_pred = model.predict(trainx, verbose=0)
+        y_pred_label = np.round(y_pred).astype(int)
+        train_results[nb_img] = recall_score(trainy, y_pred_label)
+
+    # plotting the learning curve
+    plt.plot(tests_results.keys(), tests_results.values(), marker='.', label='Test Recall')
+    plt.plot(train_results.keys(), train_results.values(), marker='.', label='Train Recall')
+    plt.xlabel('Training Data Size')
+    plt.ylabel('Model recall')
+    plt.title('Learning Curve')
+    plt.legend()
     plt.show()

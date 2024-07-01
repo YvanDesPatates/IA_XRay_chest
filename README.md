@@ -56,6 +56,8 @@ Nous testerons les modèles suivants :
 - Decision Tree Classifier (arbre de décision)
 - Random Forest (ensemble de plusieurs arbres de décision)
 - Stochastic Gradient Descent (modèle de décision linéaire)
+- Gradient Boosting Classifier
+- Logistic Regression
 
 #### Méthodologie
 

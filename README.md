@@ -54,9 +54,11 @@ Pour cette raison, nous décidons de tester plusieurs modèles de machines learn
 Nous testerons les modèles suivants :
 - KNN (modèle prédiction par mémorisation, a contrario des modèles de généralisation)
 - Decision Tree Classifier (arbre de décision)
-- Random Forest (ensemble de plusieurs arbres de décision)
+- Random Forest Classifier (ensemble de plusieurs arbres de décision)
 - Stochastic Gradient Descent (modèle de décision linéaire)
-- Gradient Boosting Classifier
+- SVC (Support Vector Classification) (apprentissage supervisé utilisée pour la classification)
+- Gradient Boosting Classifier (Méthode d'apprentissage ensembliste qui construit un modèle prédictif en combinant les prédictions de plusieurs modèles de base, généralement des arbres de décision)
+- Stochastic Gradient Descent (algorithme d'optimisation)
 - Logistic Regression
 
 #### Méthodologie

@@ -18,12 +18,12 @@ Pour le bootstrap nous nous sommes concentrés sur le machine learning. On a tes
 Une dernière partie très importante du travail est de comprendre et de mettre en place la validation croisée ainsi que les différentes metrics. 
 Le bootsrap nous à permis de mieux comprendre les metrics et analyser les résultats, au travers notamment de la matrice de confusion.
 
-Chaque étape est détaillée dans [le notebook MNIST](MNIST.ipynb), avec les résultats associés.
+Chaque étape est détaillée dans [le notebook MNIST](MNIST/MNIST.ipynb), avec les résultats associés.
 
 ### Pour aller plus loin
 
 Afin d'approfondir le Bootstrap et de le rendre plus ludique, nous avons également réalisé un model de prédiction interactif. 
-Pour l'essayer il vous suffit de lancer [ce Notebook](MNIST_interactif.ipynb) en local après avoir installé les dépendances nécessaires.
+Pour l'essayer il vous suffit de lancer [ce Notebook](MNIST/MNIST_interactif.ipynb) en local après avoir installé les dépendances nécessaires.
 ```bash 
 pip3 install numpy tensorflow scikit-learn tkinter
 ```
@@ -68,7 +68,7 @@ La premiere étape de notre méthodologie est de décider ensemble des modèles 
 Afin de comparer les modèles de manières significatives, nous n'avons comparé que des résultats issus de validation croisée. 
 Pour trouver les meilleurs hyperparamètres, nous avons utilisé une recherche par grille.
 
-Un exemple de recherche par grille pour plusieurs modèles est disponible dans [le notebook de grid search](grid_search_results.ipynb). **attention** ce Notebook met plusieurs heures pour être entièrement exécuté. Lors de nos recherches, nous avons lancé plusieurs Notebooks de ce type en parallèle, sur nos machines respectives.
+Un exemple de recherche par grille pour plusieurs modèles est disponible dans [le notebook de grid search](MACHINE/grid_search_results.ipynb). **attention** ce Notebook met plusieurs heures pour être entièrement exécuté. Lors de nos recherches, nous avons lancé plusieurs Notebooks de ce type en parallèle, sur nos machines respectives.
 
 Nous nous sommes servis de courbe de validation afin de déterminer les plages les plus intéressantes pour certains hyperparamètres.
 C'est une étape très importante car elle permet de gagner du temps lors de la recherche par grille.

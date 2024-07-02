@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 # Permet de parcourir les images, et pour chaque image, on applique une fonction de callback
 # On peut optionnellement appeler une fonction de callback pour chaque dossier
 def browse_imgs(img_callback, path_folder_callback=None, limit_size=None):
-    common_path = "./chest_Xray"
+    common_path = "../chest_Xray"
     images_files = os.listdir(common_path)
     subfolders = ["train", "val", "test"]
     categories = ["NORMAL", "PNEUMONIA"]
